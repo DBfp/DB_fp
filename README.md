@@ -37,6 +37,7 @@ CREATE TABLE student_course (
     FOREIGN KEY (course_ID) REFERENCES course(course_ID)
 );
 ```
+### testy
 ```
 LOAD DATA INFILE 'C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\courses.xls'
 INTO TABLE portfolio.courses
