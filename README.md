@@ -37,5 +37,12 @@ CREATE TABLE student_course (
     FOREIGN KEY (course_ID) REFERENCES course(course_ID)
 );
 ```
+```
+LOAD DATA INFILE 'C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\courses.xls'
+INTO TABLE portfolio.courses
+FIELDS TERMINATED BY '\t'  -- 使用 Tab 作為分隔符，根據實際情況調整
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;  -- 忽略 Excel 表格中的標題行
+```
 ## Reference
 + [遠端電腦或伺服器連結並存取本機的MySQL(不使用localhost使用IP)](https://evacyl52201.pixnet.net/blog/post/38835291)
