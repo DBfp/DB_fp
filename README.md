@@ -1,5 +1,8 @@
 # Database final project
 Group members:[WeiweiHung](https://github.com/WeiweiHung),[mason45ok](https://github.com/mason45ok)
+## Proposal
++ [First](https://www.youtube.com/watch?v=HxzPlhvYYh4)
++ [Second](https://www.youtube.com/watch?v=cbuuMkLK1sw)
 ## Code  
 ### 1.MySQL create *course* table
 ```
