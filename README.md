@@ -37,10 +37,10 @@ CREATE TABLE friendship (
 ```
 CREATE TABLE student_course (
     student_ID INT,
-    course_ID INT,
+    course_ID BIGINT,
     PRIMARY KEY (student_ID, course_ID),
     FOREIGN KEY (student_ID) REFERENCES student(student_ID),
-    FOREIGN KEY (course_ID) REFERENCES course(course_ID)
+    FOREIGN KEY (course_ID) REFERENCES courses(course_ID)
 );
 ```
 ### testy
