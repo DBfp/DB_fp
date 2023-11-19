@@ -9,6 +9,12 @@ CREATE TABLE course (
     teacher VARCHAR(255),
     credits INT
 );
+CREATE TABLE portfolio.courses (
+    course_ID INT PRIMARY KEY,
+    course_name VARCHAR(255),
+    credits DECIMAL(3, 1),
+    teacher VARCHAR(255)
+);
 ```
 ### 2.MySQL create *student* table
 ```
