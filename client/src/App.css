@@ -15,13 +15,15 @@
 }
 
 input {
-  align-items: center;
+  /*align-items: center;*/
+  margin-left: auto;
+  margin-right: auto;
   width: 220px;
   height: 56px;
   flex-shrink: 0;
   border-radius: 35px;
-border: 1px solid #91D9C4;
-background: #C6D984;
+  border: 1px solid #91D9C4;
+  background: #C6D984;
 
   display: flex;
   width: 187px;
@@ -40,7 +42,7 @@ background: #C6D984;
 }
 
 label {
-  align-items: center;
+  /*align-items: center;*/
   width: 417px;
   height: 71px;
   flex-shrink: 0;
