@@ -23,7 +23,7 @@ CREATE TABLE portfolio.courses (
 ```
 CREATE TABLE student (
     student_ID INT PRIMARY KEY,
-    student_name VARCHAR(255),
+    student_name VARCHAR(255)
 );
 ```
 ### 3.MySQL create *friendship* table  
@@ -56,3 +56,4 @@ IGNORE 1 ROWS;  -- 忽略 Excel 表格中的標題行
 ```
 ## Reference
 + [遠端電腦或伺服器連結並存取本機的MySQL(不使用localhost使用IP)](https://evacyl52201.pixnet.net/blog/post/38835291)
++ [色票](https://color.adobe.com/zh/trends/Ui/ux)
