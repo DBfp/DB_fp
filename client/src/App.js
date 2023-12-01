@@ -30,73 +30,7 @@ function App() {
     getCourseList();
     getStudentList();
   }, []);
-  const [student_ID_1, setStudent_ID_1] = useState("");
-  const [student_ID_2, setStudent_ID_2] = useState("");
-  const [editFriendId1, setEditFriendId1] = useState("");
-  const [editFriendId2, setEditFriendId2] = useState("");
-  const [editFriendName, setEditFriendName] = useState("");
-  const [editFriendship, setEditFriendship] = useState({ student_ID_1: '', student_ID_2: '' });
-  const [friendList, setFriendList] = useState([]);
-  const [showFriendList, setShowFriendList] = useState(false);
-
-  const getFriendList = () => {
-    // 發送獲取朋友列表的請求
-    Axios.get("http://localhost:3001/friendship").then((response) => {
-      setFriendList(response.data);
-    });
-  };
-
-
-  const editFriend = (friend) => {
-    setEditFriendId1(friend.student_ID_1);
-    setEditFriendId2(friend.student_ID_2);
-  };
-
-  const updateFriend = () => {
-    // 在這裡發送更新朋友的請求
-    Axios.put("http://localhost:3001/updateFriend", {
-      editFriendId1: editFriendId1,
-      editFriendId2: editFriendId2,
-    }).then(() => {
-      getFriendList();
-      setEditFriendId1("");
-      setEditFriendId2("");
-    });
-  };
-
-  const deleteFriend = (friendId) => {
-    // 在這裡發送刪除朋友的請求
-    Axios.delete(`http://localhost:3001/deleteFriend/${friendId}`).then(() => {
-      getFriendList(); // 刪除後刷新朋友列表
-    });
-  };
-
-  const addFriendship = () => {
-  // 新增朋友關係
-  Axios.post("http://localhost:3001/createFriend", {
-    student_ID_1: parseInt(student_ID_1, 10),
-    student_ID_2: parseInt(student_ID_2, 10),
-  }).then(() => {
-    getFriendList();
-    setStudent_ID_1("");
-    setStudent_ID_2("");
-  });
-};
-
-  const updateFriendship = () => {
-    // 在這裡發送更新朋友關係的請求
-    const { student_ID_1, student_ID_2 } = editFriendship;
-
-    if (student_ID_1 && student_ID_2) {
-      Axios.put("http://localhost:3001/updateFriendship", {
-        student_ID_1: parseInt(student_ID_1, 10),
-        student_ID_2: parseInt(student_ID_2, 10),
-      }).then(() => {
-        getFriendList();
-        setEditFriendship({ student_ID_1: '', student_ID_2: '' });
-      });
-    }
-  };
+ 
 
   const addCourse = () => {
     Axios.post("http://localhost:3001/createCourse", {
@@ -385,7 +319,7 @@ function App() {
       </div>
       {/* Add Friendship */}
       <div>
-        <label>Add Friendship:</label>
+        <h3>Add Friendship:</h3>
         <input
           type="text"
           placeholder="Student 1 ID"
@@ -401,8 +335,6 @@ function App() {
         <button onClick={addFriendship}>Add Friendship</button>
         <button onClick={updateFriendship}>Update Friendship</button>
       </div>
-    </div>
-
   );
 }
 
