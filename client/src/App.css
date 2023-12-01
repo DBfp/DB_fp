@@ -1,99 +1,98 @@
+/* 一般樣式 */
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* 將子元素垂直居中 */
 }
 
+/* 信息樣式 */
 .information {
-
   display: flex;
   flex-direction: column;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-
+  justify-content: center; /* 將子元素垂直居中 */
+  align-items: center; /* 將子元素水平居中 */
 }
 
+/* 輸入框樣式 */
 input {
-  /*align-items: center;*/
+
+  margin-top: 5px;
+  margin-bottom: 10px;
+  
+  display:  block;
   margin-left: auto;
   margin-right: auto;
-  width: 220px;
-  height: 56px;
-  flex-shrink: 0;
-  border-radius: 35px;
-  border: 1px solid #91D9C4;
-  background: #C6D984;
 
-  display: flex;
-  width: 187px;
-  height: 43px;
-  flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
-
-  color: #FFF;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-
+  width: 200px; 
+  height: 50px; 
+  flex-shrink: 0; /* 不允許元素縮小 */
+  border-radius: 35px; /* 圓角半徑為 35 像素 */
+  border: 1px solid #C6D984; /* 邊框寬度為 1 像素，顏色為 #91D9C4 */
+  background: #C6D984; /* 背景顏色為 #C6D984 */
+  color: #FFF; /* 文字顏色為白色 */
+  font-family: Inter; /* 使用 Inter 字體 */
+  font-size: 18px; /* 字體大小為 24 像素 */
+  font-style: normal; /* 字體風格為正常 */
+  font-weight: 400; /* 字體粗細為 400 */
+  line-height: normal; /* 行高為正常 */
 }
 
+/* 標籤樣式 */
 label {
-  /*align-items: center;*/
-  width: 417px;
-  height: 71px;
-  flex-shrink: 0;
-  border-radius: 35px;
-  background: #91D9C4;
-
-  display: flex;
-  width: 187px;
-  height: 43px;
-  flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
-
-  color: #FFF;
-  text-align: center;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  margin-top: 5px;
+  display: inline;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center; /* 元素內容置中 */
+  display: flex; /* 使用 flex 布局 */
+  justify-content: center; /* 將子元素垂直居中 */
+  width: 200px; 
+  height: 50px;  
+  flex-shrink: 0; /* 不允許元素縮小 */
+  border-radius: 35px; /* 圓角半徑為 35 像素 */
+  background: #F24C3D; /* 背景顏色為 #91D9C4 */
+  color: #FFF; /* 文字顏色為白色 */
+  text-align: center; /* 文字居中對齊 */
+  font-family: Inter; /* 使用 Inter 字體 */
+  font-size: 24px; /* 字體大小為 24 像素 */
+  font-style: normal; /* 字體風格為正常 */
+  font-weight: 400; /* 字體粗細為 400 */
+  line-height: normal; /* 行高為正常 */
 }
 
- button {
-  align-items: center;
-  width: 417px;
-  height: 81px;
-  flex-shrink: 0;
-  margin-top: 15px;
-  border-radius: 33px;
-  background: #014034;
-
-  display: flex;
-  width: 381.175px;
-  height: 63px;
+/* 按鈕樣式 */
+button {
+  margin-bottom: 25px; /* 底邊距為 25 像素 */
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center; /* 元素內容置中 */
+  display: flex; /* 使用 flex 布局 */
+  /*layout*/
+  width: 200px; 
+  height: 50px; 
+  flex-shrink: 0; /* 不允許元素縮小 */
+  border-radius: 35px; /* 圓角半徑為 35 像素 */
+  background: #014034; /* 背景顏色為 #014034 */
+  border: 1px solid #014034;
   flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: center; /* 將子元素垂直居中 */
 
-  color: #FFF;
-  text-align: center;
-  font-family: Inter;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-} 
-
- button:hover {
-  cursor: pointer;
+  color: #FFF; /* 文字顏色為白色 */
+  text-align: center; /* 文字居中對齊 */
+  font-family: Inter; /* 使用 Inter 字體 */
+  font-size: 24px; 
+  font-style: normal; /* 字體風格為正常 */
+  font-weight: 700; /* 字體粗細為 400 */
+  line-height: normal; /* 行高為正常 */
 }
 
+/* 按鈕懸停狀態 */
+button:hover {
+  cursor: pointer; /* 滑鼠懸停時顯示手型游標 */
+}
+
+/* 員工列表樣式 */
 .employees {
   display: flex;
   align-items: center;
@@ -101,16 +100,18 @@ label {
   width: 100%;
 }
 
+/* 員工樣式 */
 .employee {
-  width: 700px;
+  width: 700px; /* 寬度為 700 像素 */
   height: auto;
-  border: 1px solid black;
+  border: 1px solid black; /* 邊框寬度為 1 像素，顏色為黑色 */
   margin: 10px;
   display: flex;
   padding: 10px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, monospace; /* 使用 Courier New 字體 */
 }
 
+/* 員工標題樣式 */
 .employee h3 {
   margin: 20px;
 }

@@ -385,7 +385,7 @@ function App() {
       </div>
       {/* Add Friendship */}
       <div>
-        <h3>Add Friendship:</h3>
+        <label>Add Friendship:</label>
         <input
           type="text"
           placeholder="Student 1 ID"
