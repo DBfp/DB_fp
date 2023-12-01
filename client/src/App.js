@@ -88,7 +88,7 @@ function App() {
   };
 
   const editCourse = (course) => {
-    setEditCourseId(course.course_id);
+    setEditCourseId(course.course_ID);
     setEditCourseName(course.course_name);
     setEditCredits(course.credits);
     setEditTeacher(course.teacher);
