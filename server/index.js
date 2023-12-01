@@ -99,7 +99,7 @@ app.put("/updateStudent", (req, res) => {
   const student_name = req.body.student_name;
 
   db.query(
-    "UPDATE students SET student_name = ? WHERE student_id = ?",
+    "UPDATE student SET student_name = ? WHERE student_id = ?",
     [student_name, student_id],
     (err, result) => {
       if (err) {
@@ -127,7 +127,7 @@ app.delete("/deleteCourse/:id", (req, res) => {
 app.delete("/deleteStudent/:id", (req, res) => {
   const studentId = req.params.id;
 
-  db.query("DELETE FROM students WHERE student_id = ?", studentId, (err, result) => {
+  db.query("DELETE FROM student WHERE student_id = ?", studentId, (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -140,13 +140,13 @@ app.delete("/deleteStudent/:id", (req, res) => {
 
 //   const sqlQuery = `
 //   SELECT 
-//     students.student_name,
+//     student.student_name,
 //     student_courses.course_id,
 //     courses.course_name
 //     FROM student_courses
-//     INNER JOIN students ON students.student_id = student_courses.student_id
+//     INNER JOIN student ON student.student_id = student_courses.student_id
 //     INNER JOIN courses ON student_courses.course_id = courses.course_id
-//     WHERE students.student_name LIKE ?
+//     WHERE student.student_name LIKE ?
 //     OR student_courses.course_id LIKE ?
 //     OR courses.course_name LIKE ?
 //    `;

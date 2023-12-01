@@ -7,7 +7,7 @@ function App() {
   const [course_name, setCourse_name] = useState("");
   const [credits, setCredits] = useState("");
   const [teacher, setTeacher] = useState("");
-  const [student_id, setStudent_id] = useState("");
+  const [student_ID, setStudent_id] = useState("");
   const [student_name, setStudent_name] = useState("");
 
   const [courseList, setCourseList] = useState([]);
@@ -65,13 +65,13 @@ function App() {
 
   const addStudent = () => {
     Axios.post("http://localhost:3001/createStudent", {
-      student_id: student_id,
+      student_id: student_ID,
       student_name: student_name,
     }).then(() => {
       setStudentList([
         ...studentList,
         {
-          student_id: student_id,
+          student_ID: student_ID,
           student_name: student_name,
         },
       ]);
@@ -82,7 +82,7 @@ function App() {
   };
 
   const getStudentList = () => {
-    Axios.get("http://localhost:3001/students").then((response) => {
+    Axios.get("http://localhost:3001/student").then((response) => {
       setStudentList(response.data);
     });
   };
@@ -116,7 +116,7 @@ function App() {
   };
 
   const editStudent = (student) => {
-    setEditStudentId(student.student_id);
+    setEditStudentId(student.student_ID);
     setEditStudentName(student.student_name);
   };
 
@@ -186,7 +186,7 @@ function App() {
           <label>Student ID:</label>
           <input
             type="text"
-            value={student_id}
+            value={student_ID}
             onChange={(event) => {
               setStudent_id(event.target.value);
             }}
@@ -256,21 +256,21 @@ function App() {
         ))}
 
       </div>
-      <div className="students">
+      <div className="student">
         <button onClick={() => setShowStudentList(!showStudentList)}>
-          {showStudentList ? 'Hide Students' : 'Show Students'}
+          {showStudentList ? 'Hide Student' : 'Show Student'}
         </button>
         {showStudentList && studentList.map((student, index) => (
           <div className="student" key={index}>
             <div>
-              <h3>Student ID: {student.student_id}</h3>
+              <h3>Student ID: {student.student_ID}</h3>
               <h3>Student Name: {student.student_name}</h3>
             </div>
             <div>
               {/* 添加 "Edit" 和 "Update" 按钮 */}
               <button onClick={() => editStudent(student)}>Edit</button>
-              <button onClick={() => deleteStudent(student.student_id)}>Delete</button>
-              {editStudentId === student.student_id && (
+              <button onClick={() => deleteStudent(student.student_ID)}>Delete</button>
+              {editStudentId === student.student_ID && (
                 <div>
                   <input
                     type="text"
