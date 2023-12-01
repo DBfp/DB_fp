@@ -1,0 +1,212 @@
+﻿[
+    {
+        "course_ID": "1179",
+        "course_name": "教育資料探勘專題製作",
+        "credits": "3.0",
+        "teacher": "蔡芸琤"
+    },
+    {
+        "course_ID": "1180",
+        "course_name": "教育大數據專題製作",
+        "credits": "3.0",
+        "teacher": "蔡芸琤"
+    },
+    {
+        "course_ID": "1181",
+        "course_name": "專業實習",
+        "credits": "3.0",
+        "teacher": "陳淑媛"
+    },
+    {
+        "course_ID": "1182",
+        "course_name": "人力資源資訊系統",
+        "credits": "3.0",
+        "teacher": "孫弘岳"
+    },
+    {
+        "course_ID": "1183",
+        "course_name": "企業員工生涯管理研究",
+        "credits": "3.0",
+        "teacher": "陳淑媛"
+    },
+    {
+        "course_ID": "1184",
+        "course_name": "科技專案管理",
+        "credits": "3.0",
+        "teacher": "孫弘岳"
+    },
+    {
+        "course_ID": "1185",
+        "course_name": "計算機概論",
+        "credits": "3.0",
+        "teacher": "許庭嘉"
+    },
+    {
+        "course_ID": "1186",
+        "course_name": "工業科技教育概論",
+        "credits": "2.0",
+        "teacher": "蔡其瑞"
+    },
+    {
+        "course_ID": "1187",
+        "course_name": "基本設計",
+        "credits": "3.0",
+        "teacher": "簡佑宏"
+    },
+    {
+        "course_ID": "1188",
+        "course_name": "人力資源發展概論",
+        "credits": "3.0",
+        "teacher": "孫弘岳"
+    },
+    {
+        "course_ID": "1189",
+        "course_name": "電腦影像處理",
+        "credits": "3.0",
+        "teacher": "張玉山"
+    },
+    {
+        "course_ID": "1190",
+        "course_name": "電子電路",
+        "credits": "3.0",
+        "teacher": "丁玉良 曾騰輝"
+    },
+    {
+        "course_ID": "1191",
+        "course_name": "機械製造",
+        "credits": "3.0",
+        "teacher": "蔡其瑞"
+    },
+    {
+        "course_ID": "1192",
+        "course_name": "木工製造",
+        "credits": "3.0",
+        "teacher": "林弘昌"
+    },
+    {
+        "course_ID": "1193",
+        "course_name": "作業系統",
+        "credits": "3.0",
+        "teacher": "李啟龍"
+    },
+    {
+        "course_ID": "1194",
+        "course_name": "組織行為",
+        "credits": "3.0",
+        "teacher": "陳淑媛"
+    },
+    {
+        "course_ID": "1195",
+        "course_name": "網際網路概論",
+        "credits": "3.0",
+        "teacher": "蔡芸琤"
+    },
+    {
+        "course_ID": "1196",
+        "course_name": "色彩學",
+        "credits": "3.0",
+        "teacher": "耿?剛"
+    },
+    {
+        "course_ID": "1197",
+        "course_name": "電腦輔助製圖",
+        "credits": "3.0",
+        "teacher": "蔡其瑞"
+    },
+    {
+        "course_ID": "1198",
+        "course_name": "訓練需求與成效評估",
+        "credits": "3.0",
+        "teacher": "陳怡靜"
+    },
+    {
+        "course_ID": "1199",
+        "course_name": "程式語言",
+        "credits": "3.0",
+        "teacher": "蔡芸琤"
+    },
+    {
+        "course_ID": "1200",
+        "course_name": "展示設計",
+        "credits": "3.0",
+        "teacher": "耿?剛"
+    },
+    {
+        "course_ID": "1201",
+        "course_name": "多媒體教材設計與製作",
+        "credits": "3.0",
+        "teacher": "丁玉良 曾騰輝"
+    },
+    {
+        "course_ID": "1202",
+        "course_name": "資料庫系統",
+        "credits": "3.0",
+        "teacher": "蔡芸琤"
+    },
+    {
+        "course_ID": "1203",
+        "course_name": "電腦網路原理與實作",
+        "credits": "3.0",
+        "teacher": "吳姈蓉"
+    },
+    {
+        "course_ID": "1204",
+        "course_name": "產品設計",
+        "credits": "3.0",
+        "teacher": "簡佑宏"
+    },
+    {
+        "course_ID": "1205",
+        "course_name": "生活科技科教學實習（一）（教）",
+        "credits": "2.0",
+        "teacher": "張玉山"
+    },
+    {
+        "course_ID": "1206",
+        "course_name": "產品分析與企劃",
+        "credits": "3.0",
+        "teacher": "張敬珣"
+    },
+    {
+        "course_ID": "1207",
+        "course_name": "虛擬實境設計",
+        "credits": "3.0",
+        "teacher": "黃臣鴻"
+    },
+    {
+        "course_ID": "1208",
+        "course_name": "專題製作（二）",
+        "credits": "1.0",
+        "teacher": "丁玉良 陳怡靜"
+    },
+    {
+        "course_ID": "1209",
+        "course_name": "專題製作（二）",
+        "credits": "1.0",
+        "teacher": "蕭顯勝 孫弘岳"
+    },
+    {
+        "course_ID": "1210",
+        "course_name": "專題製作（二）",
+        "credits": "1.0",
+        "teacher": "簡佑宏"
+    },
+    {
+        "course_ID": "1211",
+        "course_name": "專題製作（二）",
+        "credits": "1.0",
+        "teacher": "林弘昌 蔡其瑞 許庭嘉"
+    },
+    {
+        "course_ID": "1212",
+        "course_name": "專題製作（二）",
+        "credits": "1.0",
+        "teacher": "蔡芸琤"
+    },
+    {
+        "course_ID": "1213",
+        "course_name": "電腦輔助設計與製造",
+        "credits": "3.0",
+        "teacher": "洪嘉駿 支裕文"
+    }
+]
