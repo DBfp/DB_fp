@@ -23,7 +23,7 @@ CREATE TABLE portfolio.courses (
 ```
 CREATE TABLE student (
     student_ID INT PRIMARY KEY,
-    student_name VARCHAR(255),
+    student_name VARCHAR(255)
 );
 ```
 ### 3.MySQL create *friendship* table  
