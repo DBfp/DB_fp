@@ -1,157 +1,290 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 
 function App() {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [country, setCountry] = useState("");
-  const [position, setPosition] = useState("");
-  const [wage, setWage] = useState(0);
+  const [course_ID, setCourse_id] = useState("");
+  const [course_name, setCourse_name] = useState("");
+  const [credits, setCredits] = useState("");
+  const [teacher, setTeacher] = useState("");
+  const [student_id, setStudent_id] = useState("");
+  const [student_name, setStudent_name] = useState("");
 
-  const [newWage, setNewWage] = useState(0);
+  const [courseList, setCourseList] = useState([]);
+  const [studentList, setStudentList] = useState([]);
 
-  const [employeeList, setEmployeeList] = useState([]);
+  const [editCourseId, setEditCourseId] = useState("");
+  const [editCourseName, setEditCourseName] = useState("");
+  const [editCredits, setEditCredits] = useState("");
+  const [editTeacher, setEditTeacher] = useState("");
+  const [editStudentId, setEditStudentId] = useState("");
+  const [editStudentName, setEditStudentName] = useState("");
 
-  const addEmployee = () => {
-    Axios.post("http://localhost:3001/create", {
-      name: name,
-      age: age,
-      country: country,
-      position: position,
-      wage: wage,
+  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  const [searchResults, setSearchResults] = useState([]); // State to store search results
+
+  const [showCourseList, setShowCourseList] = useState(false);
+  const [showStudentList, setShowStudentList] = useState(false);
+
+  useEffect(() => {
+    getCourseList();
+    getStudentList();
+  }, []);
+
+
+  const addCourse = () => {
+    Axios.post("http://localhost:3001/createCourse", {
+      course_ID: course_ID,
+      course_name: course_name,
+      credits: credits,
+      teacher: teacher,
     }).then(() => {
-      setEmployeeList([
-        ...employeeList,
+      setCourseList([
+        ...courseList,
         {
-          name: name,
-          age: age,
-          country: country,
-          position: position,
-          wage: wage,
+          course_ID: course_ID,
+          course_name: course_name,
+          credits: credits,
+          teacher: teacher,
+
         },
       ]);
+      // 清空输入框
+      setCourse_id("");
+      setCourse_name("");
+      setCredits("");
+      setTeacher("");
     });
   };
 
-  const getEmployees = () => {
-    Axios.get("http://localhost:3001/employees").then((response) => {
-      setEmployeeList(response.data);
+  const getCourseList = () => {
+    Axios.get("http://localhost:3001/courses").then((response) => {
+      setCourseList(response.data);
     });
   };
 
-  const updateEmployeeWage = (id) => {
-    Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
+  const addStudent = () => {
+    Axios.post("http://localhost:3001/createStudent", {
+      student_id: student_id,
+      student_name: student_name,
+    }).then(() => {
+      setStudentList([
+        ...studentList,
+        {
+          student_id: student_id,
+          student_name: student_name,
+        },
+      ]);
+      // 清空输入框
+      setStudent_id("");
+      setStudent_name("");
+    });
+  };
+
+  const getStudentList = () => {
+    Axios.get("http://localhost:3001/students").then((response) => {
+      setStudentList(response.data);
+    });
+  };
+
+  const editCourse = (course) => {
+    setEditCourseId(course.course_id);
+    setEditCourseName(course.course_name);
+    setEditCredits(course.credits);
+    setEditTeacher(course.teacher);
+  };
+
+  const updateCourse = () => {
+    Axios.put("http://localhost:3001/updateCourse", {
+      course_id: editCourseId,
+      course_name: editCourseName,
+      credits: editCredits,
+      teacher: editTeacher,
+    }).then(() => {
+      getCourseList();
+      setEditCourseId("");
+      setEditCourseName("");
+      setEditCredits("");
+      setEditTeacher("");
+    });
+  };
+
+  const deleteCourse = (courseId) => {
+    Axios.delete(`http://localhost:3001/deleteCourse/${courseId}`).then(() => {
+      getCourseList(); // 删除后刷新课程列表
+    });
+  };
+
+  const editStudent = (student) => {
+    setEditStudentId(student.student_id);
+    setEditStudentName(student.student_name);
+  };
+
+  const updateStudent = () => {
+    Axios.put("http://localhost:3001/updateStudent", {
+      student_id: editStudentId,
+      student_name: editStudentName,
+    }).then(() => {
+      getStudentList();
+      setEditStudentId("");
+      setEditStudentName("");
+    });
+  };
+
+  const deleteStudent = (studentId) => {
+    Axios.delete(`http://localhost:3001/deleteStudent/${studentId}`).then(() => {
+      getStudentList(); // 删除后刷新学生列表
+    });
+  };
+  const searchstudent = () => {
+    Axios.get(`http://localhost:3001/searchstudent?search=${searchQuery}`).then(
       (response) => {
-        setEmployeeList(
-          employeeList.map((val) => {
-            return val.id == id
-              ? {
-                  id: val.id,
-                  name: val.name,
-                  country: val.country,
-                  age: val.age,
-                  position: val.position,
-                  wage: newWage,
-                }
-              : val;
-          })
-        );
+        setSearchResults(response.data);
       }
     );
   };
-
-  const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
-      setEmployeeList(
-        employeeList.filter((val) => {
-          return val.id != id;
-        })
-      );
-    });
-  };
-
   return (
     <div className="App">
       <div className="information">
-        <label>Name:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
-        <label>Age:</label>
-        <input
-          type="number"
-          onChange={(event) => {
-            setAge(event.target.value);
-          }}
-        />
-        <label>Country:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setCountry(event.target.value);
-          }}
-        />
-        <label>Position:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setPosition(event.target.value);
-          }}
-        />
-        <label>Wage (year):</label>
-        <input
-          type="number"
-          onChange={(event) => {
-            setWage(event.target.value);
-          }}
-        />
-        <button onClick={addEmployee}>Add Employee</button>
+        <div className="course-input">
+          <label>Course ID:</label>
+          <input
+            type="text"
+            value={course_ID}
+            onChange={(event) => {
+              setCourse_id(event.target.value);
+            }}
+          />
+          <label>Course Name:</label>
+          <input
+            type="text"
+            value={course_name}
+            onChange={(event) => {
+              setCourse_name(event.target.value);
+            }}
+          />
+          <label>Credits:</label>
+          <input
+            type="text"
+            value={credits}
+            onChange={(event) => {
+              setCredits(event.target.value);
+            }}
+          />
+
+          <label>Teacher:</label>
+          <input
+            type="text"
+            value={teacher}
+            onChange={(event) => {
+              setTeacher(event.target.value);
+            }}
+          />
+          <button onClick={addCourse}>Add Course</button>
+        </div>
+        <div className="student-input">
+          <label>Student ID:</label>
+          <input
+            type="text"
+            value={student_id}
+            onChange={(event) => {
+              setStudent_id(event.target.value);
+            }}
+          />
+          <label>Student Name:</label>
+          <input
+            type="text"
+            value={student_name}
+            onChange={(event) => {
+              setStudent_name(event.target.value);
+            }}
+          />
+          <button onClick={addStudent}>Add Student</button>
+        </div>
       </div>
-      <div className="employees">
-        <button onClick={getEmployees}>Show Employees</button>
+      <div className="search">
+        <label>Search student:</label>
+        <input
+          type="text"
+          onChange={(event) => {
+            setSearchQuery(event.target.value);
+          }}
+        />
+        <button onClick={searchstudent}>Search</button>
+      </div>
 
-        {employeeList.map((val, key) => {
+      {/* Display search results */}
+      <div className="search-results">
+        {searchResults.map((result, index) => {
           return (
-            <div className="employee">
-              <div>
-                <h3>Name: {val.name}</h3>
-                <h3>Age: {val.age}</h3>
-                <h3>Country: {val.country}</h3>
-                <h3>Position: {val.position}</h3>
-                <h3>Wage: {val.wage}</h3>
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="2000..."
-                  onChange={(event) => {
-                    setNewWage(event.target.value);
-                  }}
-                />
-                <button
-                  onClick={() => {
-                    updateEmployeeWage(val.id);
-                  }}
-                >
-                  {" "}
-                  Update
-                </button>
-
-                <button
-                  onClick={() => {
-                    deleteEmployee(val.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
+            <div className="search-result" key={index}>
+              {/* <p>Username: {result.user_name}</p> */}
+              <p>course_id: {result.course_id}</p>
+              <p>course_name: {result.course_name}</p>
             </div>
           );
         })}
+      </div>
+      <div className="courses">
+      <button onClick={() => setShowCourseList(!showCourseList)}>
+        {showCourseList ? 'Hide Courses' : 'Show Courses'}
+      </button>
+        {showCourseList && courseList.map((course, index) => (
+          <div className="course" key={index}>
+            <div>
+              <h3>Course ID: {course.course_ID}</h3>
+              <h3>Course Name: {course.course_name}</h3>
+            </div>
+            <div>
+              {/* 添加 "Edit" 和 "Update" 按钮 */}
+              <button onClick={() => editCourse(course)}>Edit</button>
+              <button onClick={() => deleteCourse(course.course_ID)}>Delete</button>
+              {editCourseId === course.course_ID && (
+                <div>
+                  <input
+                    type="text"
+                    value={editCourseName}
+                    onChange={(event) => {
+                      setEditCourseName(event.target.value);
+                    }}
+                  />
+                  <button onClick={updateCourse}>Update</button>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+
+      </div>
+      <div className="students">
+        <button onClick={() => setShowStudentList(!showStudentList)}>
+          {showStudentList ? 'Hide Students' : 'Show Students'}
+        </button>
+        {showStudentList && studentList.map((student, index) => (
+          <div className="student" key={index}>
+            <div>
+              <h3>Student ID: {student.student_id}</h3>
+              <h3>Student Name: {student.student_name}</h3>
+            </div>
+            <div>
+              {/* 添加 "Edit" 和 "Update" 按钮 */}
+              <button onClick={() => editStudent(student)}>Edit</button>
+              <button onClick={() => deleteStudent(student.student_id)}>Delete</button>
+              {editStudentId === student.student_id && (
+                <div>
+                  <input
+                    type="text"
+                    value={editStudentName}
+                    onChange={(event) => {
+                      setEditStudentName(event.target.value);
+                    }}
+                  />
+                  <button onClick={updateStudent}>Update</button>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
