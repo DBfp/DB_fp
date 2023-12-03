@@ -3,6 +3,7 @@ Group members:[WeiweiHung](https://github.com/WeiweiHung),[mason45ok](https://gi
 ## Proposal
 + [First](https://www.youtube.com/watch?v=HxzPlhvYYh4)
 + [Second](https://www.youtube.com/watch?v=cbuuMkLK1sw)
++ [Third](https://youtu.be/d-j4gsbhNsA)
 ## Code  
 ### 1.MySQL create *course* table
 ```
