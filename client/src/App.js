@@ -25,6 +25,7 @@ function App() {
 
   const [showCourseList, setShowCourseList] = useState(false);
   const [showStudentList, setShowStudentList] = useState(false);
+  
 
   useEffect(() => {
     getCourseList();
@@ -287,7 +288,7 @@ function App() {
           </div>
         ))}
       </div>
-      {/* 朋友 */}
+      {/* 朋友
       <div className="friend">
         <button onClick={() => setShowFriendList(!showFriendList)}>
           {showFriendList ? 'Hide Friend' : 'Show Friend'}
@@ -316,9 +317,9 @@ function App() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       {/* Add Friendship */}
-      <div>
+      {/* <div>
         <h3>Add Friendship:</h3>
         <input
           type="text"
@@ -334,7 +335,8 @@ function App() {
         />
         <button onClick={addFriendship}>Add Friendship</button>
         <button onClick={updateFriendship}>Update Friendship</button>
-      </div>
+      </div> */}
+    </div>
   );
 }
 
