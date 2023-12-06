@@ -137,7 +137,70 @@ app.delete("/deleteStudent/:id", (req, res) => {
   });
 });
 
+// 創建朋友
+app.post("/createFriend", (req, res) => {
+  const student_ID_1 = req.body.student_ID_1;
+  const student_ID_2 = req.body.student_ID_2;
 
+  db.query(
+    "INSERT INTO friendship (student_ID_1, student_ID_2) VALUES (?, ?)",
+    [student_ID_1, student_ID_2],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error creating friendship");
+      } else {
+        res.send("Friendship Inserted");
+      }
+    }
+  );
+});
+
+// 獲得朋友列表
+app.get("/friendship", (req, res) => {
+  db.query("SELECT * FROM friendship", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error fetching friendships");
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// 更新朋友關係
+app.put("/updateFriendship", (req, res) => {
+  const friendship_id = req.body.friendship_id;
+  const newStudent_ID_1 = req.body.newStudent_ID_1;
+  const newStudent_ID_2 = req.body.newStudent_ID_2;
+
+  db.query(
+    "UPDATE friendship SET student_ID_1 = ?, student_ID_2 = ? WHERE friendship_id = ?",
+    [newStudent_ID_1, newStudent_ID_2, friendship_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error updating friendship");
+      } else {
+        res.send("Friendship Updated");
+      }
+    }
+  );
+});
+
+// 刪除朋友關係
+app.delete("/deleteFriendship/:id", (req, res) => {
+  const friendshipId = req.params.id;
+
+  db.query("DELETE FROM friendship WHERE friendship_id = ?", friendshipId, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error deleting friendship");
+    } else {
+      res.send("Friendship Deleted");
+    }
+  });
+});
 // app.get("/searchstudent", (req, res) => {
 //   const searchQuery = req.query.search || "";
 
