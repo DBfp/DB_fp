@@ -65,12 +65,16 @@ function App() {
     });
   };
 
-  const deleteFriend = (student_ID_1, student_ID_2) => {
+  const deleteFriend = (studentId1,studentId2) => {
     // 在這裡發送刪除朋友的請求
+    console.log("Request data:", {
+      student_ID_1: studentId1,
+      student_ID_2: studentId2,
+    });
     Axios.delete(`http://localhost:3001/deleteFriendship/`, {
       data: {
-        student_ID_1: student_ID_1,
-        student_ID_2: student_ID_2,
+        student_ID_1: studentId1,
+        student_ID_2: studentId2,
       }
     })
       .then(() => {
@@ -79,7 +83,6 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
-    // console.log(student_ID_2);
   };
   
   
@@ -382,7 +385,7 @@ function App() {
             </div>
             <div>
               <button onClick={() => editFriend(friend)}>Edit</button>
-              <button onClick={() => deleteFriend(friend.student_ID_1 && friend.student_ID_2)}>Delete</button>
+              <button onClick={() => deleteFriend(friend.student_ID_1 , friend.student_ID_2)}>Delete</button>
               {editstudent_ID_1 === friend.student_ID_1 && editstudent_ID_2 === friend.student_ID_2 &&(
                 <div>
                   <input
