@@ -193,7 +193,7 @@ app.delete("/deleteFriendship/", (req, res) => {
   // Assuming student IDs are provided in the request body or query parameters
   const student_ID_1 = req.body.student_ID_1;
   const student_ID_2 = req.body.student_ID_2;
-  console.log(req)
+  console.log('收到刪除朋友請求：', req.body);
   // Update the query to check both student IDs without considering friendshipId
   db.query(
     "DELETE FROM friendship WHERE (student_ID_1 = ? AND student_ID_2 = ?)",
