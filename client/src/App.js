@@ -65,7 +65,7 @@ function App() {
     });
   };
 
-  const deleteFriend = (student_ID_1,student_ID_2) => {
+  const deleteFriend = (student_ID_1, student_ID_2) => {
     // 在這裡發送刪除朋友的請求
     Axios.delete(`http://localhost:3001/deleteFriendship/`, {
       data: {
@@ -79,8 +79,9 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
-      // console.log(student_ID_2);
+    // console.log(student_ID_2);
   };
+  
   
   
 
