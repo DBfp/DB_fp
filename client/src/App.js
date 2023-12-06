@@ -33,8 +33,8 @@ function App() {
   }, []);
   const [student_ID_1, setStudent_ID_1] = useState("");
   const [student_ID_2, setStudent_ID_2] = useState("");
-  const [editFriendId1, setEditFriendId1] = useState("");
-  const [editFriendId2, setEditFriendId2] = useState("");
+  const [editstudent_ID_1, setEditstudent_ID_1] = useState("");
+  const [editstudent_ID_2, setEditstudent_ID_2] = useState("");
   const [editFriendName, setEditFriendName] = useState("");
   const [editFriendship, setEditFriendship] = useState({ student_ID_1: '', student_ID_2: '' });
   const [friendList, setFriendList] = useState([]);
@@ -49,34 +49,38 @@ function App() {
 
 
   const editFriend = (friend) => {
-    setEditFriendId1(friend.student_ID_1);
-    setEditFriendId2(friend.student_ID_2);
+    setEditstudent_ID_1(friend.student_ID_1);
+    setEditstudent_ID_2(friend.student_ID_2);
   };
 
   const updateFriend = () => {
     // 在這裡發送更新朋友的請求
     Axios.put("http://localhost:3001/updateFriend", {
-      editFriendId1: editFriendId1,
-      editFriendId2: editFriendId2,
+      editstudent_ID_1: editstudent_ID_1,
+      editstudent_ID_2: editstudent_ID_2,
     }).then(() => {
       getFriendList();
-      setEditFriendId1("");
-      setEditFriendId2("");
+      setEditstudent_ID_1("");
+      setEditstudent_ID_2("");
     });
   };
 
-  const deleteFriend = (student_ID_1, student_ID_2) => {
+  const deleteFriend = (student_ID_1,student_ID_2) => {
     // 在這裡發送刪除朋友的請求
-    Axios.delete(`http://localhost:3001/deleteFriendship/?student_ID_1=${student_ID_1}&student_ID_2=${student_ID_2}`)
+    Axios.delete(`http://localhost:3001/deleteFriendship/`, {
+      data: {
+        student_ID_1: student_ID_1,
+        student_ID_2: student_ID_2,
+      }
+    })
       .then(() => {
         getFriendList(); // 刪除後刷新朋友列表
       })
       .catch((error) => {
         console.error(error);
-        console.log(student_ID_1+" and "+student_ID_2);
       });
+      // console.log(student_ID_2);
   };
-  
   
   
 
@@ -129,6 +133,7 @@ function App() {
       setCourse_name("");
       setCredits("");
       setTeacher("");
+      getCourseList();
     });
   };
 
@@ -153,6 +158,7 @@ function App() {
       // 清空输入框
       setStudent_id("");
       setStudent_name("");
+      getStudentList();
     });
   };
 
@@ -376,7 +382,7 @@ function App() {
             <div>
               <button onClick={() => editFriend(friend)}>Edit</button>
               <button onClick={() => deleteFriend(friend.student_ID_1 && friend.student_ID_2)}>Delete</button>
-              {editFriendId1 === friend.student_ID_1 && editFriendId2 === friend.student_ID_2 &&(
+              {editstudent_ID_1 === friend.student_ID_1 && editstudent_ID_2 === friend.student_ID_2 &&(
                 <div>
                   <input
                     type="text"
