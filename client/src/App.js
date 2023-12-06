@@ -66,11 +66,12 @@ function App() {
   };
 
   const deleteFriend = (studentId1,studentId2) => {
-    // 在這裡發送刪除朋友的請求
+    // 除錯模塊(請注意下方HTML處也需要正確設定為,不是其他的)
     console.log("Request data:", {
       student_ID_1: studentId1,
       student_ID_2: studentId2,
     });
+    //發送刪除要求
     Axios.delete(`http://localhost:3001/deleteFriendship/`, {
       data: {
         student_ID_1: studentId1,
