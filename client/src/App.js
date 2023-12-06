@@ -65,12 +65,20 @@ function App() {
     });
   };
 
-  const deleteFriend = (friendId) => {
+  const deleteFriend = (student_ID_1, student_ID_2) => {
     // 在這裡發送刪除朋友的請求
-    Axios.delete(`http://localhost:3001/deleteFriend/${friendId}`).then(() => {
-      getFriendList(); // 刪除後刷新朋友列表
-    });
+    Axios.delete(`http://localhost:3001/deleteFriendship/?student_ID_1=${student_ID_1}&student_ID_2=${student_ID_2}`)
+      .then(() => {
+        getFriendList(); // 刪除後刷新朋友列表
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log(student_ID_1+" and "+student_ID_2);
+      });
   };
+  
+  
+  
 
   const addFriendship = () => {
   // 新增朋友關係

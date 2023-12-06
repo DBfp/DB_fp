@@ -189,18 +189,30 @@ app.put("/updateFriendship", (req, res) => {
 });
 
 // 刪除朋友關係
-app.delete("/deleteFriendship/:id", (req, res) => {
-  const friendshipId = req.params.id;
-
-  db.query("DELETE FROM friendship WHERE friendship_id = ?", friendshipId, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error deleting friendship");
-    } else {
-      res.send("Friendship Deleted");
+app.delete("/deleteFriendship/", (req, res) => {
+  // Assuming student IDs are provided in the request body or query parameters
+  const student_ID_1 = req.body.student_ID_1;
+  const student_ID_2 = req.body.student_ID_2;
+  console.log(req)
+  // Update the query to check both student IDs without considering friendshipId
+  db.query(
+    "DELETE FROM friendship WHERE (student_ID_1 = ? AND student_ID_2 = ?)",
+    [student_ID_1, student_ID_2],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error deleting friendship");
+      } else {
+        if (result.affectedRows > 0) {
+          res.send("Friendship Deleted");
+        } else {
+          res.status(404).send("Friendship not found");
+        }
+      }
     }
-  });
+  );
 });
+
 // app.get("/searchstudent", (req, res) => {
 //   const searchQuery = req.query.search || "";
 
