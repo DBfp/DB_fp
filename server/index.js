@@ -169,31 +169,110 @@ app.get("/friendship", (req, res) => {
 });
 
 // 更新朋友關係
-app.put("/updateFriendship", (req, res) => {
-  const friendship_id = req.body.friendship_id;
-  const newStudent_ID_1 = req.body.newStudent_ID_1;
-  const newStudent_ID_2 = req.body.newStudent_ID_2;
+// app.put("/updateFriendship", (req, res) => {
+//   const newStudent_ID_1 = req.body.newStudent_ID_1;
+//   const newStudent_ID_2 = req.body.newStudent_ID_2;
 
-  db.query(
-    "UPDATE friendship SET student_ID_1 = ?, student_ID_2 = ? WHERE friendship_id = ?",
-    [newStudent_ID_1, newStudent_ID_2, friendship_id],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error updating friendship");
-      } else {
-        res.send("Friendship Updated");
-      }
-    }
-  );
-});
+//   db.query(
+//     "UPDATE friendship SET student_ID_1 = ?, student_ID_2 = ?",
+//     [newStudent_ID_1, newStudent_ID_2],
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//         res.status(500).send("Error updating friendship");
+//       } else {
+//         res.send("Friendship Updated");
+//       }
+//     }
+//   );
+// });
 
 // 刪除朋友關係
 app.delete("/deleteFriendship/", (req, res) => {
   // Assuming student IDs are provided in the request body or query parameters
   const student_ID_1 = req.body.student_ID_1;
   const student_ID_2 = req.body.student_ID_2;
-  console.log('收到刪除朋友請求：', req.body);
+  //console.log('收到刪除朋友請求：', req.body);
+  // Update the query to check both student IDs without considering friendshipId
+  db.query(
+    "DELETE FROM friendship WHERE (student_ID_1 = ? AND student_ID_2 = ?)",
+    [student_ID_1, student_ID_2],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error deleting friendship");
+      } else {
+        if (result.affectedRows > 0) {
+          res.send("Friendship Deleted");
+        } else {
+          res.status(404).send("Friendship not found");
+        }
+      }
+    }
+  );
+});
+
+//選課
+
+//創建選課
+app.post("/createstudent_course", (req, res) => {
+  const student_ID = req.body.SC_S_id;
+  const course_ID = req.body.SC_C_id;
+
+  db.query(
+    "INSERT INTO student_course (student_ID, course_ID) VALUES (?, ?)",
+    [student_ID, course_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error creating student_course");
+      } else {
+        res.send("student_course Inserted");
+      }
+    }
+  );
+});
+
+// 獲得選課列表
+app.get("/Student_course", (req, res) => {
+  db.query("SELECT * FROM student_course", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error fetching student_course");
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// 刪除選課
+app.delete("/deleteStudent_course/", (req, res) => {
+  const student_ID = req.body.SC_S_id;
+  const course_ID = req.body.SC_C_id;
+  db.query(
+    "DELETE FROM student_course WHERE (student_ID = ? AND course_ID = ?)",
+    [student_ID, course_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error deleting SC");
+      } else {
+        if (result.affectedRows > 0) {
+          res.send("SC Deleted");
+        } else {
+          res.status(404).send("SC not found");
+        }
+      }
+    }
+  );
+});
+
+// 刪除朋友關係
+app.delete("/deleteStudent_course/", (req, res) => {
+  // Assuming student IDs are provided in the request body or query parameters
+  const student_ID_1 = req.body.student_ID_1;
+  const student_ID_2 = req.body.student_ID_2;
+  //console.log('收到刪除朋友請求：', req.body);
   // Update the query to check both student IDs without considering friendshipId
   db.query(
     "DELETE FROM friendship WHERE (student_ID_1 = ? AND student_ID_2 = ?)",
@@ -217,7 +296,7 @@ app.delete("/deleteFriendship/", (req, res) => {
 //   const searchQuery = req.query.search || "";
 
 //   const sqlQuery = `
-//   SELECT 
+//   SELECT
 //     student.student_name,
 //     student_courses.course_id,
 //     courses.course_name

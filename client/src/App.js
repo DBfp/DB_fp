@@ -20,8 +20,8 @@ function App() {
   const [editStudentId, setEditStudentId] = useState("");
   const [editStudentName, setEditStudentName] = useState("");
 
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
-  const [searchResults, setSearchResults] = useState([]); // State to store search results
+  // const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  // const [searchResults, setSearchResults] = useState([]); // State to store search results
 
   const [showCourseList, setShowCourseList] = useState(false);
   const [showStudentList, setShowStudentList] = useState(false);
@@ -30,13 +30,14 @@ function App() {
     getCourseList();
     getStudentList();
     getFriendList();
+    getstudent_course();
   }, []);
+
+  //朋友
   const [student_ID_1, setStudent_ID_1] = useState("");
   const [student_ID_2, setStudent_ID_2] = useState("");
-  const [editstudent_ID_1, setEditstudent_ID_1] = useState("");
-  const [editstudent_ID_2, setEditstudent_ID_2] = useState("");
-  const [editFriendName, setEditFriendName] = useState("");
-  const [editFriendship, setEditFriendship] = useState({ student_ID_1: '', student_ID_2: '' });
+  // const [newStudent_ID_1, setnewStudent_ID_1] = useState("");
+  // const [newStudent_ID_2, setnewStudent_ID_2] = useState("");
   const [friendList, setFriendList] = useState([]);
   const [showFriendList, setShowFriendList] = useState(false);
 
@@ -48,25 +49,25 @@ function App() {
   };
 
 
-  const editFriend = (friend) => {
-    setEditstudent_ID_1(friend.student_ID_1);
-    setEditstudent_ID_2(friend.student_ID_2);
-  };
+  // const editFriend = (friend) => {
+  //   setnewStudent_ID_1(friend.student_ID_1);
+  //   setnewStudent_ID_2(friend.student_ID_2);
+  // };
 
-  const updateFriend = () => {
-    // 在這裡發送更新朋友的請求
-    Axios.put("http://localhost:3001/updateFriend", {
-      editstudent_ID_1: editstudent_ID_1,
-      editstudent_ID_2: editstudent_ID_2,
-    }).then(() => {
-      getFriendList();
-      setEditstudent_ID_1("");
-      setEditstudent_ID_2("");
-    });
-  };
+  // const updateFriend = () => {
+  //   // 在這裡發送更新朋友的請求
+  //   Axios.put("http://localhost:3001/updateFriend", {
+  //     setnewStudent_ID_1: newStudent_ID_1,
+  //     setnewStudent_ID_2: newStudent_ID_2,
+  //   }).then(() => {
+  //     getFriendList();
+  //     setnewStudent_ID_1("");
+  //     setnewStudent_ID_2("");
+  //   });
+  // };
 
-  const deleteFriend = (studentId1,studentId2) => {
-    // 除錯模塊(請注意下方HTML處也需要正確設定為,不是其他的)
+  const deleteFriend = (studentId1, studentId2) => {
+    // 除錯模塊(請注意下方HTML處也需要正確設定為「,」不是其他的)
     console.log("Request data:", {
       student_ID_1: studentId1,
       student_ID_2: studentId2,
@@ -85,37 +86,66 @@ function App() {
         console.error(error);
       });
   };
-  
-  
-  
 
   const addFriendship = () => {
-  // 新增朋友關係
-  Axios.post("http://localhost:3001/createFriend", {
-    student_ID_1: student_ID_1,
-    student_ID_2: student_ID_2,
-  }).then(() => {
-    getFriendList();
-    setStudent_ID_1("");
-    setStudent_ID_2("");
-  });
-};
-
-  const updateFriendship = () => {
-    // 在這裡發送更新朋友關係的請求
-    const { student_ID_1, student_ID_2 } = editFriendship;
-
-    if (student_ID_1 && student_ID_2) {
-      Axios.put("http://localhost:3001/updateFriendship", {
-        student_ID_1: parseInt(student_ID_1, 10),
-        student_ID_2: parseInt(student_ID_2, 10),
-      }).then(() => {
-        getFriendList();
-        setEditFriendship({ student_ID_1: '', student_ID_2: '' });
-      });
-    }
+    // 新增朋友關係
+    Axios.post("http://localhost:3001/createFriend", {
+      student_ID_1: student_ID_1,
+      student_ID_2: student_ID_2,
+    }).then(() => {
+      getFriendList();
+      setStudent_ID_1("");
+      setStudent_ID_2("");
+    });
   };
 
+  //選課
+  const [student_courseList, setstudent_courseList] = useState([]);
+  const [showstudent_courseList, setShowstudent_courseList] = useState(false);
+  const [SC_S_id, setSC_S_id] = useState("");
+  const [SC_C_id, setSC_C_id] = useState("");
+
+  const getstudent_course = () => {
+    // 發送獲取選課列表的請求
+    Axios.get("http://localhost:3001/Student_course").then((response) => {
+      setstudent_courseList(response.data);
+    });
+  };
+
+  const addstudent_course = () => {
+    // 新增選課關係
+    Axios.post("http://localhost:3001/createstudent_course", {
+      SC_S_id: SC_S_id,
+      SC_C_id: SC_C_id,
+    }).then(() => {
+      getstudent_course();
+      setSC_S_id("");
+      setSC_C_id("");
+    });
+  };
+
+  const deletestudent_course = (SC_Sid, SC_Cid) => {
+    // 除錯模塊(請注意下方HTML處也需要正確設定為「,」不是其他的)
+    console.log("Request data:", {
+      SC_S_id: SC_Sid,
+      SC_C_id: SC_Cid,
+    });
+    //發送刪除要求
+    Axios.delete(`http://localhost:3001/deleteStudent_course/`, {
+      data: {
+        SC_S_id: SC_Sid,
+        SC_C_id: SC_Cid,
+      }
+    })
+      .then(() => {
+        getstudent_course(); // 刪除後刷新選課列表
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  //課程
   const addCourse = () => {
     Axios.post("http://localhost:3001/createCourse", {
       course_ID: course_ID,
@@ -148,31 +178,6 @@ function App() {
     });
   };
 
-  const addStudent = () => {
-    Axios.post("http://localhost:3001/createStudent", {
-      student_id: student_ID,
-      student_name: student_name,
-    }).then(() => {
-      setStudentList([
-        ...studentList,
-        {
-          student_ID: student_ID,
-          student_name: student_name,
-        },
-      ]);
-      // 清空输入框
-      setStudent_id("");
-      setStudent_name("");
-      getStudentList();
-    });
-  };
-
-  const getStudentList = () => {
-    Axios.get("http://localhost:3001/student").then((response) => {
-      setStudentList(response.data);
-    });
-  };
-
   const editCourse = (course) => {
     setEditCourseId(course.course_ID);
     setEditCourseName(course.course_name);
@@ -201,6 +206,31 @@ function App() {
     });
   };
 
+  //學生
+  const addStudent = () => {
+    Axios.post("http://localhost:3001/createStudent", {
+      student_id: student_ID,
+      student_name: student_name,
+    }).then(() => {
+      setStudentList([
+        ...studentList,
+        {
+          student_ID: student_ID,
+          student_name: student_name,
+        },
+      ]);
+      // 清空输入框
+      setStudent_id("");
+      setStudent_name("");
+      getStudentList();
+    });
+  };
+
+  const getStudentList = () => {
+    Axios.get("http://localhost:3001/student").then((response) => {
+      setStudentList(response.data);
+    });
+  };
   const editStudent = (student) => {
     setEditStudentId(student.student_ID);
     setEditStudentName(student.student_name);
@@ -222,45 +252,50 @@ function App() {
       getStudentList(); // 删除后刷新学生列表
     });
   };
-  const searchstudent = () => {
-    Axios.get(`http://localhost:3001/searchstudent?search=${searchQuery}`).then(
-      (response) => {
-        setSearchResults(response.data);
-      }
-    );
-  };
+  // const searchstudent = () => {
+  //   Axios.get(`http://localhost:3001/searchstudent?search=${searchQuery}`).then(
+  //     (response) => {
+  //       setSearchResults(response.data);
+  //     }
+  //   );
+  // };
+
+  //前端介面
+
   return (
     <div className="App">
       <div className="information">
         <div className="course-input">
-          <label>Course ID:</label>
+          <h3>
+            Add Course:
+          </h3>
           <input
             type="text"
+            placeholder="Course ID:"
             value={course_ID}
             onChange={(event) => {
               setCourse_id(event.target.value);
             }}
           />
-          <label>Course Name:</label>
           <input
             type="text"
+            placeholder="Course Name:"
             value={course_name}
             onChange={(event) => {
               setCourse_name(event.target.value);
             }}
           />
-          <label>Credits:</label>
           <input
             type="text"
+            placeholder="Credits:"
             value={credits}
             onChange={(event) => {
               setCredits(event.target.value);
             }}
           />
-
-          <label>Teacher:</label>
           <input
             type="text"
+            placeholder="Teacher:"
             value={teacher}
             onChange={(event) => {
               setTeacher(event.target.value);
@@ -269,17 +304,20 @@ function App() {
           <button onClick={addCourse}>Add Course</button>
         </div>
         <div className="student-input">
-          <label>Student ID:</label>
+          <h3>
+            Add Student:
+          </h3>
           <input
             type="text"
+            placeholder="Student ID:"
             value={student_ID}
             onChange={(event) => {
               setStudent_id(event.target.value);
             }}
           />
-          <label>Student Name:</label>
           <input
             type="text"
+            placeholder="Student Name:"
             value={student_name}
             onChange={(event) => {
               setStudent_name(event.target.value);
@@ -288,7 +326,41 @@ function App() {
           <button onClick={addStudent}>Add Student</button>
         </div>
       </div>
-      <div className="search">
+      {/* Add Friendship */}
+      <div>
+        <h3>Add Friendship:</h3>
+        <input
+          type="text"
+          placeholder="Student 1 ID"
+          value={student_ID_1}
+          onChange={(event) => setStudent_ID_1(event.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Student 2 ID"
+          value={student_ID_2}
+          onChange={(event) => setStudent_ID_2(event.target.value)}
+        />
+        <button onClick={addFriendship}>Add Friendship</button>
+      </div>
+      {/* Add student_course */}
+      <div>
+        <h3>Add Student_Course:</h3>
+        <input
+          type="text"
+          placeholder="Student ID"
+          value={SC_S_id}
+          onChange={(event) => setSC_S_id(event.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="course ID"
+          value={SC_C_id}
+          onChange={(event) => setSC_C_id(event.target.value)}
+        />
+        <button onClick={addstudent_course}>Add student_course</button>
+      </div>
+      {/* <div className="search">
         <label>Search student:</label>
         <input
           type="text"
@@ -297,24 +369,66 @@ function App() {
           }}
         />
         <button onClick={searchstudent}>Search</button>
-      </div>
+      </div> */}
 
       {/* Display search results */}
-      <div className="search-results">
+
+      {/* <div className="search-results">
         {searchResults.map((result, index) => {
           return (
-            <div className="search-result" key={index}>
-              {/* <p>Username: {result.user_name}</p> */}
-              <p>course_id: {result.course_id}</p>
+            <div className="search-result" key={index}> */}
+
+      {/* <p>Username: {result.user_name}</p> */}
+
+      {/* <p>course_id: {result.course_id}</p>
               <p>course_name: {result.course_name}</p>
             </div>
           );
         })}
+      </div> */}
+      {/* 朋友 */}
+      <div className="friend">
+        <button onClick={() => setShowFriendList(!showFriendList)}>
+          {showFriendList ? 'Hide Friend' : 'Show Friend'}
+        </button>
+        {showFriendList && friendList.map((friend, index) => (
+          <div className="friend" key={index}>
+            <div>
+              <h3>Friend ID1: {friend.student_ID_1}</h3>
+              <h3>Friend ID2: {friend.student_ID_2}</h3>
+            </div>
+            <div>
+              {/* <button onClick={() => editFriend(friend)}>Edit</button> */}
+              <button onClick={() => deleteFriend(friend.student_ID_1, friend.student_ID_2)}>Delete</button>
+              {/* {newStudent_ID_1 === friend.student_ID_1 && newStudent_ID_2 === friend.student_ID_2 && (
+                // <div>
+                //   <input
+                //     type="text"
+                //     placeholder="Student 1 ID"
+                //     value={newStudent_ID_1}
+                //     onChange={(event) => {
+                //       setnewStudent_ID_1(event.target.value)
+                //     }}
+                //   />
+                //   <input
+                //     type="text"
+                //     placeholder="Student 2 ID"
+                //     value={newStudent_ID_2}
+                //     onChange={(event) => {
+                //       setnewStudent_ID_2(event.target.value);
+                //     }}
+                //   />
+                //   <button onClick={updateFriend}>Update</button>
+                // </div>
+              )} */}
+            </div>
+          </div>
+        ))}
       </div>
       <div className="courses">
-      <button onClick={() => setShowCourseList(!showCourseList)}>
-        {showCourseList ? 'Hide Courses' : 'Show Courses'}
-      </button>
+        <button onClick={() => setShowCourseList(!showCourseList)}>
+          {showCourseList ? 'Hide Courses' : 'Show Courses'}
+        </button>
         {showCourseList && courseList.map((course, index) => (
           <div className="course" key={index}>
             <div>
@@ -373,53 +487,24 @@ function App() {
           </div>
         ))}
       </div>
-      {/* 朋友 */}
-      <div className="friend">
-        <button onClick={() => setShowFriendList(!showFriendList)}>
-          {showFriendList ? 'Hide Friend' : 'Show Friend'}
+      {/* 選課 */}
+      <div className="student_course">
+        <button onClick={() => setShowstudent_courseList(!showstudent_courseList)}>
+          {showstudent_courseList ? 'Hide student_course' : 'Show student_course'}
         </button>
-        {showFriendList && friendList.map((friend, index) => (
-          <div className="friend" key={index}>
+        {showstudent_courseList && student_courseList.map((student_courseList, index) => (
+          <div className="student_course" key={index}>
             <div>
-              <h3>Friend ID1: {friend.student_ID_1}</h3>
-              <h3>Friend ID2: {friend.student_ID_2}</h3>
+              <h3>student_ID: {student_courseList.student_ID}</h3>
+              <h3>course_ID: {student_courseList.course_ID}</h3>
             </div>
             <div>
-              <button onClick={() => editFriend(friend)}>Edit</button>
-              <button onClick={() => deleteFriend(friend.student_ID_1 , friend.student_ID_2)}>Delete</button>
-              {editstudent_ID_1 === friend.student_ID_1 && editstudent_ID_2 === friend.student_ID_2 &&(
-                <div>
-                  <input
-                    type="text"
-                    value={editFriendName}
-                    onChange={(event) => {
-                      setEditFriendName(event.target.value);
-                    }}
-                  />
-                  <button onClick={updateFriend}>Update</button>
-                </div>
-              )}
+              {/* <button onClick={() => editFriend(friend)}>Edit</button> */}
+              <button onClick={() => deletestudent_course(student_courseList.student_ID, student_courseList.course_ID)}>Delete</button>
+              {/* 刪除格式為 table.column */}
             </div>
           </div>
         ))}
-      </div>
-      {/* Add Friendship */}
-      <div>
-        <h3>Add Friendship:</h3>
-        <input
-          type="text"
-          placeholder="Student 1 ID"
-          value={student_ID_1}
-          onChange={(event) => setStudent_ID_1(event.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Student 2 ID"
-          value={student_ID_2}
-          onChange={(event) => setStudent_ID_2(event.target.value)}
-        />
-        <button onClick={addFriendship}>Add Friendship</button>
-        <button onClick={updateFriendship}>Update Friendship</button>
       </div>
     </div>
 
