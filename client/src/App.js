@@ -394,8 +394,8 @@ function App() {
         {showFriendList && friendList.map((friend, index) => (
           <div className="friend" key={index}>
             <div>
-              <h3>Friend ID1: {friend.student_ID_1}</h3>
-              <h3>Friend ID2: {friend.student_ID_2}</h3>
+              <h3>Friend SID_1: {friend.student_ID_1}</h3>
+              <h3>Friend SID_2: {friend.student_ID_2}</h3>
             </div>
             <div>
               {/* <button onClick={() => editFriend(friend)}>Edit</button> */}
@@ -434,6 +434,8 @@ function App() {
             <div>
               <h3>Course ID: {course.course_ID}</h3>
               <h3>Course Name: {course.course_name}</h3>
+              <h3>Credits: {course.credits}</h3>
+              <h3>Teacher: {course.teacher}</h3>
             </div>
             <div>
               {/* 添加 "Edit" 和 "Update" 按钮 */}
