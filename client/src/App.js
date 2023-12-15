@@ -20,8 +20,8 @@ function App() {
   const [editStudentId, setEditStudentId] = useState("");
   const [editStudentName, setEditStudentName] = useState("");
 
-  // const [searchQuery, setSearchQuery] = useState(""); // State for the search query
-  // const [searchResults, setSearchResults] = useState([]); // State to store search results
+  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
+  const [searchResults, setSearchResults] = useState([]); // State to store search results
 
   const [showCourseList, setShowCourseList] = useState(false);
   const [showStudentList, setShowStudentList] = useState(false);
@@ -252,13 +252,13 @@ function App() {
       getStudentList(); // 删除后刷新学生列表
     });
   };
-  // const searchstudent = () => {
-  //   Axios.get(`http://localhost:3001/searchstudent?search=${searchQuery}`).then(
-  //     (response) => {
-  //       setSearchResults(response.data);
-  //     }
-  //   );
-  // };
+  const searchstudent = () => {
+    Axios.get(`http://localhost:3001/searchstudent?search=${searchQuery}`).then(
+      (response) => {
+        setSearchResults(response.data);
+      }
+    );
+  };
 
   //前端介面
 
@@ -360,8 +360,9 @@ function App() {
         />
         <button onClick={addstudent_course}>Add student_course</button>
       </div>
-      {/* <div className="search">
-        <label>Search student:</label>
+
+      <div className="search">
+        <h3>Search student:</h3>
         <input
           type="text"
           onChange={(event) => {
@@ -369,23 +370,22 @@ function App() {
           }}
         />
         <button onClick={searchstudent}>Search</button>
-      </div> */}
+      </div>
 
       {/* Display search results */}
 
-      {/* <div className="search-results">
+      <div className="search-results">
         {searchResults.map((result, index) => {
           return (
-            <div className="search-result" key={index}> */}
-
-      {/* <p>Username: {result.user_name}</p> */}
-
-      {/* <p>course_id: {result.course_id}</p>
-              <p>course_name: {result.course_name}</p>
+            <div className="search-result" key={index}>
+               {/* <p>Username: {result.user_name}</p> */}
+                <p>course_ID: {result.course_ID}</p>
+                <p>course_name: {result.course_name}</p>
             </div>
           );
         })}
-      </div> */}
+      </div>
+
       {/* 朋友 */}
       <div className="friend">
         <button onClick={() => setShowFriendList(!showFriendList)}>

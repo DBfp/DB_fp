@@ -292,32 +292,34 @@ app.delete("/deleteStudent_course/", (req, res) => {
   );
 });
 
-// app.get("/searchstudent", (req, res) => {
-//   const searchQuery = req.query.search || "";
+app.get("/searchstudent", (req, res) => {
+  const searchQuery = req.query.search || "";
 
-//   const sqlQuery = `
-//   SELECT
-//     student.student_name,
-//     student_courses.course_id,
-//     courses.course_name
-//     FROM student_courses
-//     INNER JOIN student ON student.student_id = student_courses.student_id
-//     INNER JOIN courses ON student_courses.course_id = courses.course_id
-//     WHERE student.student_name LIKE ?
-//     OR student_courses.course_id LIKE ?
-//     OR courses.course_name LIKE ?
-//    `;
+  const sqlQuery = `
+    SELECT
+      student.student_ID,
+      student_course.course_ID,
+      courses.course_name
+    FROM \`final-project\`.student AS student
+    INNER JOIN student_course ON student.student_ID = student_course.student_ID
+    INNER JOIN courses ON student_course.course_ID = courses.course_ID
+    WHERE student.student_ID = ?
+    OR student_course.course_ID = ?
+    OR courses.course_name = ?
+  `;
 
-//   db.query(
-//     sqlQuery,
-//     [`%${searchQuery}%`, `%${searchQuery}%`, `%${searchQuery}%`],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//         res.status(500).send("Error fetching search results");
-//       } else {
-//         res.send(result);
-//       }
-//     }
-//   );
-// });
+  db.query(
+    sqlQuery,
+    [searchQuery, searchQuery, searchQuery],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("檢索搜索結果時發生錯誤");
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+
