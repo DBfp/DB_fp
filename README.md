@@ -4,6 +4,7 @@ Group members:[WeiweiHung](https://github.com/WeiweiHung),[mason45ok](https://gi
 + [First](https://www.youtube.com/watch?v=HxzPlhvYYh4)
 + [Second](https://www.youtube.com/watch?v=cbuuMkLK1sw)
 + [Third](https://youtu.be/d-j4gsbhNsA)
++ [Final](https://www.youtube.com/watch?v=6HQszu_cbws)
 ## Code  
 ### 1.MySQL create *course* table
 ```
