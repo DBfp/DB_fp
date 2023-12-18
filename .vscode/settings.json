@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/93bab8d3-d15d-4008-bcfc-8d050ba4af25/resourceGroups/DataBase-FP/providers/Microsoft.Web/sites/DatabaseFP",
+    "appService.deploySubpath": "client"
+}
